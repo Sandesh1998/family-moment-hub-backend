@@ -16,6 +16,7 @@ const corsOption = {
     "https://localhost:5173",
     "https://localhost:3000",
     "https://localhost:3001",
+    "http://family-moment-hub.onrender.com",
   ],
 };
 
