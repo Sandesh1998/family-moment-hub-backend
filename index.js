@@ -14,7 +14,7 @@ app.use(express.static("public"));
 const corsOption = {
   origin: [
     "https://localhost:5173",
-    "https://localhost:3000",
+    "http://localhost:3000",
     "https://localhost:3001",
     "http://family-moment-hub.onrender.com",
   ],
