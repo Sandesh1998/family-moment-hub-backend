@@ -20,7 +20,6 @@ exports.uploadPhotos = async (req, res) => {
         path: image,
       });
     }
-    // split the path to remove public
     images = images.map((image) => {
       return {
         filename: image.filename,
