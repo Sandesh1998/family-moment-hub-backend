@@ -2,41 +2,17 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
+const helmet = require("helmet");
 
 require("dotenv").config();
 require("./config/dbConfig");
 
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors());
 app.use(express.static("public"));
 
-const corsOption = {
-  origin: [
-    "https://localhost:5173",
-    "http://localhost:3000",
-    "https://localhost:3001",
-    "http://family-moment-hub.onrender.com",
-    "https://family-moment-hub.onrender.com",
-  ],
-};
-
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (corsOption.origin.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept,Authorization"
-  );
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-    return res.json({});
-  }
-  next();
-});
+app.use(cors());
+app.use(helmet());
 
 //
 const routers = require("./main.route");
