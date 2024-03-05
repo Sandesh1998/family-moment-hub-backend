@@ -11,7 +11,16 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use(cors({ origin: "*" }));
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? ["http://localhost:3000", "https://family-moment-hub.onrender.com"]
+      : "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 app.use(helmet());
 
 //
