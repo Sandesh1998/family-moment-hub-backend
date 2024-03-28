@@ -1,12 +1,55 @@
 pipeline {
     agent { label 'agentlinux' }
 
+    environment {
+        // Define environment variables if needed
+        HOME = '.'
+    }
+
     stages {
-        stage('check version') {
+        stage('Check Versions') {
             steps {
                 sh 'node --version'
                 sh 'npm --version'
             }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Replace "npm test" with your test command if different
+                sh 'npm test'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                // Add your build command here
+                // For a simple Node.js app, this might be unnecessary
+                echo 'Building the project...'
+                // For example: sh 'npm run build'
+            }
+        }
+        
+       
+    
+    post {
+        // Define actions to take after pipeline completion
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+        always {
+            // Actions to always perform
+            echo 'Cleaning up...'
+            // Clean up actions, like removing temporary files
         }
     }
 }
