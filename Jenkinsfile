@@ -1,3 +1,4 @@
+// Pipeline script for Jenkins
 pipeline{
     agent {
         docker {
